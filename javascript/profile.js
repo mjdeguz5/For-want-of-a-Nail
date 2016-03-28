@@ -1,7 +1,9 @@
 var url_base = //UNDEFINED
 
 $(document).ready(function(){
-	$userid = // ???
+	
+	$userid = getUser(); //returns the id of the user ??
+	//TODO: add this function to our document
 	
 	getData($userid); //pass user as parameter
 	
@@ -10,7 +12,8 @@ $(document).ready(function(){
 	//if log out is clicked
 	$('#logout').click(function() {
 		//disactivate cookies
-		disactivateCookies();
+		disactivateCookies(); 
+		//TODO: add this function to our document
 		
 		//load landing page
 		window.location.href = urlbase+"/landpage.html";
@@ -69,9 +72,11 @@ function getData($userid){
 }
 
 function processData(response /*textStatus, jqXHR*/) {
-    var response = JSON.parse(response);
-   
+    //var response = JSON.parse(response);
+	var title = todo_json[i]['title'];
     //insert stuff in the html here
+   	$("#selection").append(text);
+
 
 }
 
