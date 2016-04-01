@@ -1,9 +1,8 @@
 //var url_base = //UNDEFINED
 
 $(document).ready(function(){
-	alert("bla");
+	
 	$userid = getUser(); //returns the id of the user ??
-		
 	getData($userid); //pass user as parameter
 	getBio();
 	
@@ -128,6 +127,7 @@ function processData(response /*textStatus, jqXHR*/) {
 	$("#level").append(totalpoints/10); // we might change this later!
 	
 	//TODO INSERT THE prof PICTURE
+
 }
 
 function getStatistics($userid){
