@@ -1,18 +1,20 @@
 //var url_base = //UNDEFINED
 
 $(document).ready(function(){
+	alert("started");
 	
-	$userid = getUser(); //returns the id of the user ??
-	getData($userid); //pass user as parameter
-	getBio();
-	
+}
+//	$userid = getUser(); //returns the id of the user ??
+//	getData($userid); //pass user as parameter
+//	getBio();
+
 	//Things that will end up loading new pages:
 	
 	//if log out is clicked
-	$('#logout').click(function() {
+/*	$('#logout').click(function() {
 		//disactivate cookies
-		disactivateCookies(); 
-		//TODO: add this function to our document
+															disactivateCookies(); 
+															//TODO: add this function to our document
 		
 		//load landing page
 		window.location.href = urlbase+"/landpage.html";
@@ -25,7 +27,7 @@ $(document).ready(function(){
 	
 	//if edit profile is clicked
 	$('#edit').click(function() {
-		window.location.href = urlbase+"/edit.html";
+		window.location.href = urlbase+"/editprofile.html";
 	});
 	
 	//if help is clicked
@@ -35,6 +37,7 @@ $(document).ready(function(){
 	
 	//if mailbox is clicked
 	$('#mailbox').click(function() {
+		alert("clicked");
 		window.location.href = urlbase+"/mailbox.html";
 	});
 	
@@ -102,7 +105,7 @@ function processData(response /*textStatus, jqXHR*/) {
 	List of names of the items (same order as itemsids) “itemsnames”
 	List of disaster’s name’s related to each item “disastersnames”
 	List of ngo’s name’s related to each item “ngosnames”
-	List of total points for each item under voting “itemstotalpoints”	*/
+	List of total points for each item under voting “itemstotalpoints”	
 
     //var response = JSON.parse(response);
 	var username = response['username'];
@@ -143,7 +146,7 @@ function getStatistics($userid){
     });
 }
 
-function processStatistics(response /*textStatus, jqXHR*/) {
+function processStatistics(response /*textStatus, jqXHR) {
     var response = JSON.parse(response);
 	
     //insert stuff in the html here
@@ -163,7 +166,7 @@ function getTimeline($userid){
     });
 }
 
-function processTimeline(response /*textStatus, jqXHR*/) {
+function processTimeline(response /*textStatus, jqXHR) {
     var response = JSON.parse(response);
    
     //insert stuff in the html here
@@ -183,7 +186,7 @@ function getBio($userid){
     });
 }
 
-function processBio(response /*textStatus, jqXHR*/) {
+function processBio(response /*textStatus, jqXHR) {
     //var response = JSON.parse(response);
     var name = response['name'];
     var text = response['bio'];
@@ -210,7 +213,7 @@ function getBadge($userid){
     });
 }
 
-function processBadge(response /*textStatus, jqXHR*/) {
+function processBadge(response /*textStatus, jqXHR) {
     var response = JSON.parse(response);
    
     //insert stuff in the html here
