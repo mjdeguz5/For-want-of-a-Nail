@@ -1,7 +1,7 @@
 var url_base = //UNDEFINED
 
 $(document).ready(function(){
-	alert("dsa");
+	alert("javascript working");
 	var mapProp = {
 		center:new google.maps.LatLng(35.54339, -79.02591),
 		zoom:6,

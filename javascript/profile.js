@@ -1,63 +1,64 @@
-//var url_base = //UNDEFINED
+var url_base = "http://www.inf.ufpr.br/lmwc14/UNC/";//UNDEFINED
 
-$(document).ready(function(){
+$(document).ready(function(){ 
 	alert("started");
-	
-}
-//	$userid = getUser(); //returns the id of the user ??
-//	getData($userid); //pass user as parameter
-//	getBio();
-
+	var $userid = "0";
+	getData($userid); //pass user as parameter
 	//Things that will end up loading new pages:
 	
 	//if log out is clicked
-/*	$('#logout').click(function() {
+	$('#logout').click(function() {
 		//disactivate cookies
-															disactivateCookies(); 
+															//disactivateCookies(); 
 															//TODO: add this function to our document
 		
 		//load landing page
-		window.location.href = urlbase+"/landpage.html";
+		window.location.href = "landpage.html";
 	});
 	
 	//if dashboard is clicked
 	$('#dashboard').click(function() {
-		window.location.href = urlbase+"/dashboard.html";
+		window.location.href = "dashboard.html";
 	});
 	
 	//if edit profile is clicked
 	$('#edit').click(function() {
-		window.location.href = urlbase+"/editprofile.html";
+		window.location.href = "editprofile.html";
 	});
 	
 	//if help is clicked
 	$('#help').click(function() {
-		window.location.href = urlbase+"/help.html";
+		window.location.href = "help.html";
 	});
 	
 	//if mailbox is clicked
-	$('#mailbox').click(function() {
+	$("#mailbox a").click(function() {
 		alert("clicked");
-		window.location.href = urlbase+"/mailbox.html";
+		window.location.href = "mailbox.html";
 	});
 	
 	//Things to apply on the same page
 	//if Statistics is selected
 	$('#statistics').click(function() {
-		getStatictis();
+		getStatictis($userid);
 	});
 	//if timeline is selected
 	$('#timeline').click(function() {
-		getTimeline();
+		getTimeline($userid);
 	});
 	//if bio is selected
 	$('#biography').click(function() {
-		getBio();
+		getBio($userid);
 	});	
 	//if badge is selected
 	$('#badges').click(function() {
-		getBadge();
+		getBadge($userid);
 	});
+	
+	$userid = getUser(); //returns the id of the user 				
+	
+	getBio($userid);
+
 });
 
 function getUser(){
@@ -76,11 +77,12 @@ function getUser(){
 
 function processUserid(response){
 	var userid = response['userid'];
-	return(userid)
+	return(userid);
 }
 
 function getData($userid){
-	$.ajax(url_base + "/profile.php", // MATTEW: you can change here to call the php code you prefer
+	alert("in getdata");
+	$.ajax(url_base+"mockup.php", 
 					{type: "GET",
 						  dataType: "json",
 						  data: {"userid": $userid,} //Or whatever is returned to me to confirm the user
@@ -94,43 +96,49 @@ function getData($userid){
 
 function processData(response /*textStatus, jqXHR*/) {
 	/*Luiza don’t forget to add *User’s level and calculate it yourself
+	Variables expected back: 
 	User’s username “username”
-	User’s real name “name” - NOT ANYMORE
 	User’s headline “headline”
 	User’s profile picture “picture”
-	Player’s specialty “specialty”
 	Player’s location “location”
-	User’s total points “totalpoints”
-	List of User’s items ID’s that are currently under voting “itemsids”
-	List of names of the items (same order as itemsids) “itemsnames”
-	List of disaster’s name’s related to each item “disastersnames”
-	List of ngo’s name’s related to each item “ngosnames”
-	List of total points for each item under voting “itemstotalpoints”	
+	User’s total points “totalpoints”	
+	List of the badges the user prefers to have on the left of the page “badges”*/
+
 
     //var response = JSON.parse(response);
+	alert("in here");
+	$("#badgesdiv").hide();
+	$("#statisticsdiv").hide();
+	$("#timelinediv").hide();
+
 	var username = response['username'];
 	var headline = response['headline'];
-	//TODO SOLVE THE PICTURE PROBLEM
-	
-	var specialty = response['specialty'];
+	var image = response['picture'];
+																	//TODO SOLVE THE PICTURE PROBLEM	
 	var location = response['location'];
 	var totalpoints = response['totalpoints'];
-	var itemsids[] = response['itemsids'];
-	var itemsnames[] = respoinse['itemsnames'];
-	var disasternames[] = response['disastersnames'];
-	var ngosnames[] = response['ngosnames'];
-	var itemstotalpoints[] = response['itemstotalpoints'];
+	var badges = response['badges'];
 	
 	//insert stuff in the html here
+	$("#username").empty();
    	$("#username").append(username);
+   	$( "#headline" ).empty();
    	$("#headline").append(headline);
-	$("#specialty").append(specialty);
+   	$( "#location" ).empty();
 	$("#location").append(location);
+	$( "#totalpoints").empty();
 	$("#totalpoints").append(totalpoints);
-	$("#level").append(totalpoints/10); // we might change this later!
+	$( "#level" ).empty();
+	$("#level").append(totalpoints/10); // we might change this later!	
+																	//TODO INSERT THE prof PICTURE
+	$( "#sidebadges" ).empty();
+	var i;
+	for (i = 0; len < badges.length; i++) { 
+		$("#sidebadges").append("<img src='img/"+badges[i]+"' alt='"+badges[i]+"' width='75' height='75'>");
+	}
 	
-	//TODO INSERT THE prof PICTURE
-
+	
+	
 }
 
 function getStatistics($userid){
@@ -146,10 +154,76 @@ function getStatistics($userid){
     });
 }
 
-function processStatistics(response /*textStatus, jqXHR) {
-    var response = JSON.parse(response);
+function processStatistics(response /*textStatus, jqXHR*/) {
+    //var response = JSON.parse(response);
 	
-    //insert stuff in the html here
+    /*Player’s date of sign up “date” (I will calculate total time played on jscript) in MM/DD/YYYY format
+	Player’s total number of recommendations by:
+		List of broad tags “broadtags”
+(list of integers) broad tag of item “broadtagsrec”
+		List of States of the US “states”
+(list of integers) states recommendations “statesrec”
+		List of NGO’s “ngos”
+(list of integers) ngos recommendations “ngosrec”
+		List of disaster’s types “disasters”
+(list of integers) disaster’s recommendations “disastersrec”
+		List of NGO’s types “ngostypes”
+(list of integers) ngos recommendations “ngostypesrec”
+
+	Player’s list of disasters involved in “disastersids”
+	Name of those disasters involved in “disastersnames”*/
+	
+	//hide everything but statistics
+	
+	$("#badgesdiv").hide();
+	$("#timelinediv").hide();
+	$("#biographydiv").hide();
+
+	var broadtags = response['broadtags'];
+	var broadtagsrec = response['broadtagsrec'];
+	var states = response['states'];
+	var statesrec = response['statesrec'];
+	var ngos = response['ngos'];
+	var ngosrec = response['ngosrec'];
+	var disasters = response['disasters'];
+	var disastersrec = response['disastersrec'];
+	var ngostypes = response['ngostypes'];
+	var ngostypesrec = response['ngostypesrec'];
+	var disastersids = response['disastersids'];
+	var disastersnames = response['disastersnames'];
+	$("#broadtags").empty();   	
+	$("#states").empty();	
+	$("#ngos").empty();
+	$("#disasterstype").empty();
+	$("#ngostypes").empty();   	
+	$("#disastersids").empty();   	
+	$("#disastersnames").empty();
+	var i;
+	for(i = 0; i < broadtags.length; i++){
+		$("#broadtags").append("<h5>"+broadtags[i]+": "+broadtagsrec[i]+"</h5>");
+	}
+	
+	for(i = 0; i < states.length; i++){
+		$("#states").append("<h5>"+states[i]+": "+statesrec[i]+"</h5>");
+	}
+	
+	for(i = 0; i < ngos.length; i++){
+		$("#ngos").append("<h5>"+ngos[i]+": "+ngosrec[i]+"</h5>");
+	}
+	
+	for(i = 0; i < disasters.length; i++){
+		$("#disasterstype").append("<h5>"+disasters[i]+": "+disastersrec[i]+"</h5>");
+	}
+	
+	for(i = 0; i < ngostypes.length; i++){
+		$("#ngostypes").append("<h5>"+ngostypes[i]+": "+ngostypesrec[i]+"</h5>");
+	}
+	
+	for(i = 0; i < disastersnames.length; i++){
+		$("#disastersnames").append("<h5>"+disastersnames[i]+"</h5>");
+	}
+	
+	$("#statisticsdiv").show();
 
 }
 
@@ -166,11 +240,54 @@ function getTimeline($userid){
     });
 }
 
-function processTimeline(response /*textStatus, jqXHR) {
-    var response = JSON.parse(response);
-   
-    //insert stuff in the html here
+function processTimeline(response /*textStatus, jqXHR*/) {
+    //var response = JSON.parse(response);
+		/*
+		List of items the player has worked or is working with “items”{
+			item title “title” , as given by the NGO when they input wishlist
+	item id  “itemid”
+			item proposal “proposal” (this is the explanation of why to buy the item)
+			link given on the proposal “link”
+			total votes received “votes”
+			disaster ID’s related to item “disasterid”, not shown on html
+			disaster’s name related to item “disastername”
+			types of disaster related to item “disastertype”
+			NGO’s name related to item “ngoname”
+			NGO’s id related to item “ngoid”
+			price proposed for item “price”
+			time it would take to deliver the item “delivertime”
+		}
+	List of User’s items ID’s that are currently under voting “itemsids”*/
+	
+   $("#badgesdiv").hide();
+   $("#statisticsdiv").hide();
+   $("#biographydiv").hide();
+	
+	var items = response['items'];
+	var itemsids = response['itemsids'];
+	$("#tablebody").empty();   	
+/*<tr>
+	<td><small>Disaster XYZ <img src="img/flag_usa.png" alt="USA Flag" width="75" height="75"> </small></td>
+	<td><small>Ladder</small></td>
+	<td><small>NGO ABC</small></td>
+	<td><small>Hyperlink</small></td>
+	<td><small>Description</small></td>
+	<td><small>X $</small></td>
+	<td><small>Y Dayz</small></td>
+	<td><small>Z Points</small></td>
+</tr> */
+	var i;
+	
+	for(i=0; i < items.length; i++){
+		$("#tablebody").append(
+			"<tr><td><small>"+item.disastername+"<img src='"+item.disastertype+".png' alt='"+item.disastertype+"' width='75' height='75'></small></td>"
+			+"<td><small>"+item.title+"</small></td>"+"<td><small>"+item.ngoname+"</small></td>"+"<td><small>"+item.link+"</small></td>"
+			+"<td><small>"+item.proposal+"</small></td>"+"<td><small>"+item.price+"</small></td>"+"<td><small>"+item.delivertime+"</small></td>"
+			+"<td><small>"+item.votes+"</small></td></tr>"
+		);
+	}
 
+	$("#timelinediv").show();
 }
 
 function getBio($userid){
@@ -186,18 +303,41 @@ function getBio($userid){
     });
 }
 
-function processBio(response /*textStatus, jqXHR) {
+function processBio(response /*textStatus, jqXHR*/) {
     //var response = JSON.parse(response);
-    var name = response['name'];
+    /*List of prefered NGO’s of the player “ngos”
+	Bio text “bio”
+	Player’s specialty “specialty”
+	User’s real first name “fname”  
+	Last name “lname”
+	Date in which the player joined the website “signupdate”
+
+*/
+
+	$("#badgesdiv").hide();
+    $("#statisticsdiv").hide();
+    $("#timelinediv").hide();
+	
+    var fname = response['fname'];
+    var lname = response['lname'];
+
     var text = response['bio'];
     var signupdate = response['signupdate'];
-    var ngos[] = response['ngos'];
-    $("#name").append(name);
+    var ngos = response['ngos'];
+    var specialty = response['specialty'];
+    $("#fullname").empty();
+    $("#bio").empty();
+    $("#signupdate").empty();
+	$("#ngos").empty();
+
+    $("#fullname").append(fname+" "+lname);
     $("#bio").append(text);
     $("#signupdate").append(signupdate);
     for (x in ngos){
-		$("#ngos").append("<li>"+x+"</li>");
+		$("#ngos").append("<li>"+x.ngoname+"</li>");
 	}
+	$("#biographydiv").show();
+
 }
 
 function getBadge($userid){
@@ -213,11 +353,68 @@ function getBadge($userid){
     });
 }
 
-function processBadge(response /*textStatus, jqXHR) {
-    var response = JSON.parse(response);
-   
-    //insert stuff in the html here
+function processBadge(response /*textStatus, jqXHR*/) {
+   // var response = JSON.parse(response);
+   /*List of all the badges(even the ones the user doesn’t have) “allbadges” {	
+		description for each badge, text explaining how to earn it  “badgedescription” 
+		how many good offers the user has for the badge “numberoffers”. So for example, if you had 3 accepted offers for earthquakes it will return 3 to the earthquake badge.  
+		How many offers are needed to complete each badge “offerstocomplete”
+}
+List of badges this user has “badges”
+	List of the prefered badges of the user “preferredbadges” //added the 03/29 */
 
+
+
+    $("#biographydiv").hide();
+	$("#statisticsdiv").hide();
+	$("#timelinediv").hide();
+	
+	$("#badgesbody").empty();
+	
+	var allbadges = response["allbadges"];
+	var badges = response["badges"];
+	
+	for (badge in allbadges){
+		var userhas = 0;
+		var userfavorite = 0;
+		for(b in badges){
+				if(badge.badgename == b){
+					userhas = 1;
+				}
+		}
+		for(b in prefferedbadges){
+				if(badge.badgename == b){
+					userfavorite = 1;
+				}
+		}
+		if (userhas == 1){
+			if(userfavorite == 1){
+				$("#badgesbody").append("<tr class='onebadge' id='"+badge.badgename+"'><td><img src ='"+badge.badgename+".png' alt='"+badge.badgename
+				+"' Height = '100' width '100'></td> <td><p>Offers: "+badge.numberoffers+"/"
+				+badge.offerstocomplete+"</p></td> <td> How to earn it: "+badgedescription
+				+"</td><td><form action='demo_form.asp' method='get'>"
+				+"<input type='checkbox' name='add' value='1' checked> Favorite <br>"
+				+"<input type='checkbox' name='dontadd' value='0'> Not favorite <br>"
+				+"<input type='submit' value='Submit'>"
+				+"</form></td></tr>");
+			}
+			else{
+			$("#badgesbody").append("<tr class='onebadge' id='"+badge.badgename+"'><td><img src ='"+badge.badgename+".png' alt='"+badge.badgename
+				+"' Height = '100' width '100'></td> <td><p>Offers: "+badge.numberoffers+"/"
+				+badge.offerstocomplete+"</p></td> <td> How to earn it: "+badgedescription
+				+"</td><td><form action='demo_form.asp' method='get'>"
+				+"<input type='checkbox' name='add' value='1'> Favorite <br>"
+				+"<input type='checkbox' name='dontadd' value='0' checked> Not favorite <br>"
+				+"<input type='submit' value='Submit'>"
+				+"</form></td></tr>");
+			}
+		}
+		else{
+			$("#badgesbody").append("<tr class='onebadge' id='"+badge.badgename+"'><td><img src ='"+badge.badgename+".png' alt='"+badge.badgename+"' Height = '100' width '100'></td> <td><p>Offers: "+badge.numberoffers+"/"+badge.offerstocomplete+"</p></td> <td> How to earn it: "+badgedescription+"</td></tr>");
+		}
+	}
+	
+	$("#badgesdiv").show();
 }
 
 /*
