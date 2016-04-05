@@ -15,6 +15,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script	src="http://maps.googleapis.com/maps/api/js"> </script>	
         <title>Profile View</title>
+
+
     </head>
     <body>
         <div class="page-container">
@@ -25,19 +27,19 @@
                         <span class="icon-bar"></span>
                         <span
                             class="icon-bar"></span> <span class="icon-bar"></span>
-                        </button> <a class="navbar-brand" id= "help">For the Want of A Nail</a>
+                        </button> <a class="navbar-brand" id= "help" href="#">For the Want of A Nail</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li id = "dashboard"><a>Dashboard</a>
+                            <li id = "dashboard" ><a  href="#">Dashboard</a>
                             </li>
-                            <li id = "profile"><a>Profile</a>
+                            <li id = "profile"><a  href="#">Profile</a>
                             </li>
-                            <li id = "mailbox"><a>Inbox</a>
+                            <li id = "mailbox" ><a href="#">Inbox</a>
                             </li>
-                            <li id = "edit"><a>Edit Profile</a>
+                            <li id = "edit"><a href="#">Edit Profile</a>
                             </li>
-                            <li id = "logout"><a>Logout</a>
+                            <li id = "logout"><a  href="#">Logout</a>
                             </li>
                         </ul>
                         <form class="navbar-form navbar-right">
@@ -50,21 +52,21 @@
                 <div class="row row-offcanvas row-offcanvas-left">
                     <!-- sidebar -->
                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" >
-                        <img src="img/profile_pic.jpg" alt = "Profile Pic" height="200" width = "150">
-                        <h1> Jforbes94</h1>
+                        <img id ="picture" src="img/profile_pic.jpg" alt = "Profile Pic" height="200" width = "150">
+                        <h1 id = "username"> Jforbes94</h1>
+						<h4 id = "headline"> Headline: </h4>
 
                         <button type="button" class="btn btn-primary-outline btn-sm btn-block">Send Message</button>
-                        <h4> Location <img src="img/flag_usa.png" alt = "Profile Pic" height="20" width = "20"></h4>
-                        <h4>Level: 5</h4>
-                        <h4>Total Score: 12000</h4>
-                        <h4>Speciality: </h4>
-
+                        
+                        <h4 id="location"> Location <img src="img/flag_usa.png" alt = "Profile Pic" height="20" width = "20"></h4>
+                        <h4 id="level">Level: 5</h4>
+                        <h4 id="totalpoints">Total Score: 12000</h4>
                         <h4>Trophy Case <br></h4>
-
-                        <img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
-                        <img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
-                        <img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
-
+						<div id = "sidebadges">
+							<img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
+							<img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
+							<img src="img/flag_usa.png" alt="USA Flag" width="75" height="75">
+						</div>
 
                     </div>
                     <div class="col-xs-12 col-sm-9">
@@ -75,10 +77,10 @@
                                     <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
-                                <li  id = "biography"><a>Biography</a></li>
-                                <li  id = "timeline" class= "active"><a>Timeline</a></li>
-                                <li  id = "badges"><a>Badges</a></li>
-                                <li  id = "statistics"><a>Statistics</a></li>
+                                <li  id = "biography" class= "active"><a href="#">Biography</a></li>
+                                <li  id = "timeline" ><a href="#">Timeline</a></li>
+                                <li  id = "badges"><a href="#">Badges</a></li>
+                                <li id = "statistics"><a  href="#">Statistics</a></li>
                                 <li>
                                     <a href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -89,25 +91,21 @@
                         <div id ="biographydiv">
                             <h1> Biography</h1>
                             <hr>
-                            <h4>Fullname: Jeffrey Forbes </h4>
-                            <h4>Headline: </h4>
-                            
+                            <h4 id ="fullname">Fullname: Jeffrey Forbes </h4>
+                            <h4 id ="signupdate"> Relief Supporter Since:  Febuary 14th, 2016 </h4>
+
                             <h4> About: </h4>
-                            <p>  Vestibulum porttitor massa eget pellentesque eleifend. Suspendisse tempor,
+                            <p id ="bio">  Vestibulum porttitor massa eget pellentesque eleifend. Suspendisse tempor,
                                 nisi eu placerat auctor, est erat tempus neque, pellentesque venenatis
                                 eros lorem vel quam.  
                             </p>
                             <h4>Favorite Organizations:</h4>
-                            <ul>
+                            <ul id="ngos">
                                 <li>NGO Name</li>
                                 <li>American Red Cross </li>
                                 <li>Habitat For Humanity</li>
                             </ul>
-                        </div>
-
-
-
-                        
+                        </div>   
                         <div id="timelinediv">
                             <h1> Timeline </h1>
                             <hr>
@@ -128,9 +126,9 @@
                                                 <th class="col-md-1"><small>Votes</small></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tablebody">
                                             <tr>
-                                                <td><small>Disaster XYZ</small></td>
+                                                <td><small>Disaster XYZ <img src="img/flag_usa.png" alt="USA Flag" width="75" height="75"> </small></td>
                                                 <td><small>Ladder</small></td>
                                                 <td><small>NGO ABC</small></td>
                                                 <td><small>Hyperlink</small></td>
@@ -148,8 +146,21 @@
                         <div id="badgesdiv">
                             <h1> Badges </h1>
                             <hr>
-                            <table class="table-bordered">
-                                <tr>
+                            <table id="badgesbody" class="table-bordered">
+                                    <tr>
+                                    <td>
+                                        <img src="img/flag_usa.png" alt = "Flag" Height = "100" width "100">
+                                    </td>
+                                    <td>Offers 10/10</td>
+                                    <td>This badge can be won by dljldksjaldjask. and dshajdasjk.</td>
+										<td>
+										<form action="demo_form.asp">
+										  <input type="checkbox" name="vehicle" value="Bike"> I have a bike<br>
+										  <input type="checkbox" name="vehicle" value="Car" checked> I have a car<br>
+										  <input type="submit" value="Submit">
+										</form>
+										</td>
+                                    <tr>
                                     <td>
                                         <img src="img/flag_usa.png" alt = "Flag" Height = "100" width "100">
                                     </td>
@@ -171,10 +182,7 @@
                                     <td>
                                         <img src="img/flag_usa.png" alt = "Flag" Height = "100" width "100">
                                     </td>
-                                    <td>
-                                        <img src="img/flag_usa.png" alt = "Flag" Height = "100" width "100">
-                                    </td>
-                                <tr>
+                                
                             </table>
                         </div>
                         
@@ -185,16 +193,13 @@
                             </h1>
                             <hr>
 
-                            <h4> Relief Supporter Since:  Febuary 14th, 2016 </h4>
                             <h3>Offers Made</h3>
 
-
-                            
                             <hr>
-
+				
                             <div class="panel panel-default">
-                                <div class="panel-heading">By Disasater Type</div>
-                                <div class="panel-body">
+                                <div class="panel-heading">By Disaster Type</div>
+                                <div id="disasterstype" class="panel-body">
                                     <h5>Disaster Type A (N>0): N</h5>
                                     <h5>Fire: 10</h5>
                                     <h5>Tornado: 0</h5>
@@ -202,15 +207,15 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">By State</div>
-                                <div class="panel-body">
+                                <div id="states" class="panel-body">
                                     <h5>State A (N> 0): N</h5>
                                     <h5>North Carolina: 5</h5>
                                     <h5>Michigan: 3</h5>
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading">By Organization</div>
-                                <div class="panel-body">
+                                <div class="panel-heading">By Organization Type</div>
+                                <div id="ngosstatistics" class="panel-body">
                                     <h5>Ngo Name A with N> 0: N</h5>
                                     <h5>Habitat for Humanity: 5</h5>
                                     <h5>American Cancer Society: 3</h5>
@@ -218,7 +223,7 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">By Item Category</div>
-                                <div class="panel-body">
+                                <div id="broadtags" class="panel-body">
                                     <h5>Item Broad tag Name A with N> 0: N</h5>
                                     <h5>Technology: 5</h5>
                                     <h5>Medical: 3</h5>
@@ -226,18 +231,17 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">By NGO Category</div>
-                                <div class="panel-body">
+                                <div id="ngostypes" class="panel-body">
                                     <h5>NGO Broad tag Name A with N> 0: N</h5>
                                     <h5>Secular: 5</h5>
                                     <h5>Conservation: 3</h5>
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading">By Name</div>
-                                <div class="panel-body">
-                                    <h5>Disaster Name: N</h5>
-                                    <h5>Hurricane Floyd: 5</h5>
-                                    <h5>Krusty Krab Anchovie Destruction: 3</h5>
+                                <div class="panel-heading">Disasters involved in:</div>
+                                <div id="disastersnames" class="panel-body">
+                                    <h5>Hurricane Floyd</h5>
+                                    <h5>Krusty Krab Anchovie Destruction</h5>
                                 </div>
                             </div>
                         </div>
