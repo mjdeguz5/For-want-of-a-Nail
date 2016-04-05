@@ -40,18 +40,34 @@ $(document).ready(function(){
 	//Things to apply on the same page
 	//if Statistics is selected
 	$('#statistics').click(function() {
+		$('#statistics').toggleClass("active", true);
+		$('#timeline').toggleClass("active", false);
+		$('#badges').toggleClass("active", false);
+		$('#biography').toggleClass("active", false);
 		getStatictis($userid);
 	});
 	//if timeline is selected
 	$('#timeline').click(function() {
+		$('#statistics').toggleClass("active", false);
+		$('#timeline').toggleClass("active", true);
+		$('#badges').toggleClass("active", false);
+		$('#biography').toggleClass("active", false);
 		getTimeline($userid);
 	});
 	//if bio is selected
 	$('#biography').click(function() {
+		$('#statistics').toggleClass("active", false);
+		$('#timeline').toggleClass("active", false);
+		$('#badges').toggleClass("active", false);
+		$('#biography').toggleClass("active", true);
 		getBio($userid);
 	});	
 	//if badge is selected
 	$('#badges').click(function() {
+		$('#statistics').toggleClass("active", false);
+		$('#timeline').toggleClass("active", false);
+		$('#badges').toggleClass("active", true);
+		$('#biography').toggleClass("active", false);
 		getBadge($userid);
 	});
 	
@@ -120,6 +136,7 @@ function processData(response /*textStatus, jqXHR*/) {
 	var badges = response['badges'];
 	
 	//insert stuff in the html here
+	$("#picture").attr("src", image);
 	$("#username").empty();
    	$("#username").append(username);
    	$( "#headline" ).empty();
@@ -133,8 +150,8 @@ function processData(response /*textStatus, jqXHR*/) {
 																	//TODO INSERT THE prof PICTURE
 	$( "#sidebadges" ).empty();
 	var i;
-	for (i = 0; len < badges.length; i++) { 
-		$("#sidebadges").append("<img src='img/"+badges[i]+"' alt='"+badges[i]+"' width='75' height='75'>");
+	for (i = 0; i < badges.length; i++) { 
+		$("#sidebadges").append("<img src='disaster icons/badges/"+badges[i]+"' alt='"+badges[i]+"' width='75' height='75'>");
 	}
 	
 	
@@ -193,7 +210,7 @@ function processStatistics(response /*textStatus, jqXHR*/) {
 	var disastersnames = response['disastersnames'];
 	$("#broadtags").empty();   	
 	$("#states").empty();	
-	$("#ngos").empty();
+	$("#ngosstatistics").empty();
 	$("#disasterstype").empty();
 	$("#ngostypes").empty();   	
 	$("#disastersids").empty();   	
@@ -208,7 +225,7 @@ function processStatistics(response /*textStatus, jqXHR*/) {
 	}
 	
 	for(i = 0; i < ngos.length; i++){
-		$("#ngos").append("<h5>"+ngos[i]+": "+ngosrec[i]+"</h5>");
+		$("#ngosstatistics").append("<h5>"+ngos[i]+": "+ngosrec[i]+"</h5>");
 	}
 	
 	for(i = 0; i < disasters.length; i++){
@@ -333,8 +350,8 @@ function processBio(response /*textStatus, jqXHR*/) {
     $("#fullname").append(fname+" "+lname);
     $("#bio").append(text);
     $("#signupdate").append(signupdate);
-    for (x in ngos){
-		$("#ngos").append("<li>"+x.ngoname+"</li>");
+    for (var i = 0; i < ngos.length; i++){
+		$("#ngos").append("<li>"+ngos[i]+"</li>");
 	}
 	$("#biographydiv").show();
 
